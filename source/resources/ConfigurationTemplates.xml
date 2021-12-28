@@ -1,0 +1,33 @@
+<TemplateDefinitions>
+
+	<Components>
+
+		<StorageService>
+			<attr name="name" required="yes" default="IndexedDicomBuffer"/>
+			<attr name="class" required="yes" default="org.rsna.ctp.stdstages.IndexedDicomBuffer" editable="no"/>
+			<attr name="id" required="yes" default="">
+				<helptext>Unique identifier used as the context of the stage's servlet.</helptext>
+			</attr>
+			<attr name="root" required="yes" default="roots/IndexedDicomBuffer">
+				<helptext>The location of the stored files.</helptext>
+			</attr>
+			<attr name="index" required="yes" default="roots/IndexedDicomBuffer/index">
+				<helptext>The location of the index to the stored files.</helptext>
+			</attr>
+			<attr name="store" required="yes" default="roots/IndexedDicomBuffer/store">
+				<helptext>The location of the stored files.</helptext>
+			</attr>
+			<attr name="url" required="yes" default="">
+				<helptext>URL of the destination POSDA site (starting with http:// or https://)</helptext>
+			</attr>
+			<attr name="apikey" required="yes" default="">
+				<helptext>API key for POSDA export</helptext>
+			</attr>
+			<attr name="quarantine" required="yes" default="quarantines/IndexedDicomBuffer"/>
+			<attr name="quarantineTimeDepth" required="no" default="0"/>
+		</StorageService>
+
+	</Components>
+
+</TemplateDefinitions>
+
