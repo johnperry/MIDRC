@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -327,8 +328,14 @@ public class IndexedDicomBuffer extends AbstractPipelineStage implements Storage
 		}
 		catch (Exception ex) { logger.warn("Unable to get list of patients", ex); }
 		Patient[] pts = ptList.toArray( new Patient[ptList.size()] );
-		Arrays.sort(pts);
+		Arrays.sort(pts, new PatientIDComparator());
 		return pts;
+	}
+	
+	class PatientIDComparator implements Comparator<Patient> {
+		public int compare(Patient p1, Patient p2) {
+			return p1.getPatientID().compareTo(p2.getPatientID());
+		}
 	}
 
 	/**
