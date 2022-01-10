@@ -450,7 +450,7 @@ public class IndexedDicomBuffer extends AbstractPipelineStage implements Storage
 			+ "<td>" + nUnqueuedStudies + "</td></tr>");
 		sb.append("<tr><td width=\"20%\">Unqueued images:</td>"
 			+ "<td>" + nUnqueuedInstances + "</td></tr>");
-		sb.append("<tr><td width=\"20%\">Queued patients in storage:</td>"
+		sb.append("<tr><td width=\"20%\">Queued patients:</td>"
 			+ "<td>" + nQueuedPatients + "</td></tr>");
 		sb.append("<tr><td width=\"20%\">Queued studies:</td>"
 			+ "<td>" + nQueuedStudies + "</td></tr>");

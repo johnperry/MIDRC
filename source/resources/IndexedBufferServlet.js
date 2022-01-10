@@ -20,7 +20,7 @@ function selectAll(event) {
 }
 
 function selectRange(event) {
-	var currentClicked = parseInt(event.target.id) + 1;
+	var currentClicked = parseInt(event.target.id) + firstPtCB - 1;
 	if (event.shiftKey && (lastClicked >= firstPtCB)) {
 		var x = document.getElementsByTagName("input");
 		var sel = x[lastClicked].checked;
