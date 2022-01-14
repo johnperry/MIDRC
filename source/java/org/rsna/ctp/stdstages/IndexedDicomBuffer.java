@@ -15,6 +15,8 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -636,7 +638,8 @@ public class IndexedDicomBuffer extends AbstractPipelineStage implements Storage
 	}	
 	
 	private String getEventIDRequestURL(String message) throws Exception {
-		String u = url + "/v1/import/event?source=" + message;
+		String u = url + "/v1/import/event?source=" 
+			+ URLEncoder.encode(message, StandardCharsets.UTF_8.toString());
 		if (!apikey.equals("")) u += "&apikey="+apikey;
 		return u;
 	}
