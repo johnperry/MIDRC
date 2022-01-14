@@ -646,7 +646,7 @@ public class IndexedDicomBuffer extends AbstractPipelineStage implements Storage
 	private String getImportEventID(String message) throws Exception {
 		
 		//If no apikey, consider this to be a CTP HTTP Export
-		if (apikey.equals("")) return "0";
+		if (!requestImportEventID) return "1";
 		
 		//\Get the event ID from the POSDA site
 		HttpURLConnection conn = null;

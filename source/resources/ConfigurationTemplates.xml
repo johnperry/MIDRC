@@ -24,7 +24,7 @@
 				<helptext>API key for POSDA export</helptext>
 			</attr>
 			<attr name="requestImportEventID" required="yes" default="yes" options="yes|no">
-				<helptext>Request the import event ID from the POSDA site before transmission</helptedxt>
+				<helptext>Request the import event ID from the POSDA site before transmission</helptext>
 			</attr>
 			<attr name="quarantine" required="yes" default="quarantines/IndexedDicomBuffer"/>
 			<attr name="quarantineTimeDepth" required="no" default="0"/>
