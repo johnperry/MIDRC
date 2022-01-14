@@ -112,7 +112,7 @@ public class IndexedDicomBuffer extends AbstractPipelineStage implements Storage
 		//Get the destination url
 		url = element.getAttribute("url").trim();
 		apikey = element.getAttribute("apikey").trim();
-		requestImportEventID = element.getAttribute("requestImportEventID").equals("yes");
+		requestImportEventID = !element.getAttribute("requestImportEventID").equals("no");
 		
 		//Check that we have an id for use as the context or the servlet
 		if (id.equals("")) logger.error(name+": No id attribute was specified.");
