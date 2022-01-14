@@ -62,7 +62,7 @@ public class IndexedDicomBuffer extends AbstractPipelineStage implements Storage
 
 	String url;
 	String apikey;
-	String protocol;
+	boolean requestImportEventID = true;
 	volatile File lastFileStored = null;
 	volatile long lastTime = 0;
 	Tracker tracker = null;
@@ -112,8 +112,8 @@ public class IndexedDicomBuffer extends AbstractPipelineStage implements Storage
 		//Get the destination url
 		url = element.getAttribute("url").trim();
 		apikey = element.getAttribute("apikey").trim();
-		//logger.info(name+": url: "+url);
-		//logger.info(name+": apikey: \""+apikey+"\"");
+		requestImportEventID = element.getAttribute("requestImportEventID").equals("yes");
+		
 		//Check that we have an id for use as the context or the servlet
 		if (id.equals("")) logger.error(name+": No id attribute was specified.");
 	}
@@ -558,10 +558,7 @@ public class IndexedDicomBuffer extends AbstractPipelineStage implements Storage
 				String patientID = fileObject.getPatientID();
 
 				String hash = getDigest(fileToExport).toLowerCase();
-				String query = "";
-				if (!apikey.equals("")) {
-					query = "?import_event_id="+importEventID+"&digest="+hash+"&apikey="+apikey;
-				}
+				String query = "?import_event_id="+importEventID+"&digest="+hash+"&apikey="+apikey;
 				URL u = new URL(getURL() + query);
 				logger.debug("Export URL: "+u.toString());
 
@@ -569,7 +566,7 @@ public class IndexedDicomBuffer extends AbstractPipelineStage implements Storage
 				conn = HttpUtil.getConnection(u);
 				conn.setReadTimeout(connectionTimeout);
 				conn.setConnectTimeout(readTimeout);
-				if (!apikey.equals("")) conn.setRequestMethod("PUT"); //POSDA requires PUT
+				conn.setRequestMethod("PUT"); //POSDA requires PUT
 				conn.connect();
 
 				//Send the file to the server
@@ -654,8 +651,7 @@ public class IndexedDicomBuffer extends AbstractPipelineStage implements Storage
 		//\Get the event ID from the POSDA site
 		HttpURLConnection conn = null;
 		URL u = new URL(getEventIDRequestURL(message));
-		logger.debug("getImportEventID");
-		logger.debug("...URL: "+u.toString());
+		logger.debug("getImportEventID URL: "+u.toString());
 		conn = HttpUtil.getConnection(u);
 		conn.setReadTimeout(connectionTimeout);
 		conn.setConnectTimeout(readTimeout);
